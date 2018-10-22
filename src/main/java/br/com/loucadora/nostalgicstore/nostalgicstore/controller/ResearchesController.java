@@ -1,7 +1,7 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.controller;
 
 import java.util.List;
-
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.loucadora.nostalgicstore.nostalgicstore.model.Researcher;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.response.ErrorResponse;
 import br.com.loucadora.nostalgicstore.nostalgicstore.services.ResearchesService;
 
 @RestController
@@ -25,13 +25,16 @@ public class ResearchesController {
 		this.researchesService = researchesService;
 	}
 
-
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> create(@RequestBody Researcher researcher) {
-		return new ResponseEntity<Researcher>(researchesService.create(researcher), HttpStatus.CREATED);
+		try {
+			return new ResponseEntity<Researcher>(researchesService.create(researcher), HttpStatus.CREATED);
+		}catch(ConstraintViolationException e) {
+			return new ResponseEntity<ErrorResponse>(new ErrorResponse().preconditionFailed(e.getConstraintViolations()), HttpStatus.PRECONDITION_FAILED);
+		}
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> show(@PathVariable Integer id) {
 		return new ResponseEntity<Researcher>(researchesService.find(id), HttpStatus.OK);
 	}

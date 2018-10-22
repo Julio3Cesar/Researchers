@@ -1,7 +1,9 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.repositories;
 
 import org.springframework.stereotype.Repository;
-import br.com.loucadora.nostalgicstore.nostalgicstore.model.Researcher;
+
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository

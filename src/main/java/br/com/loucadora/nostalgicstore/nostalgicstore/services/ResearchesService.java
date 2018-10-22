@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.loucadora.nostalgicstore.nostalgicstore.model.Researcher;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchesRepository;
 
 @Service
