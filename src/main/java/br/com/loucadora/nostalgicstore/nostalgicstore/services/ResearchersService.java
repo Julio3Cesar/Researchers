@@ -10,16 +10,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
-import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchesRepository;
+import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchersRepository;
 
 import static java.util.Collections.emptyList;
 
 
 @Service
-public class ResearchesService implements UserDetailsService{
+public class ResearchersService implements UserDetailsService{
 	
 	@Autowired
-	private ResearchesRepository repository;
+	private ResearchersRepository repository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 

@@ -11,18 +11,18 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import br.com.loucadora.nostalgicstore.nostalgicstore.services.ResearchesService;
+import br.com.loucadora.nostalgicstore.nostalgicstore.services.ResearchersService;
 
 import org.springframework.context.annotation.Bean;
 
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-    private ResearchesService researchesService;
+    private ResearchersService researchersService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public WebSecurity(ResearchesService researchesService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.researchesService = researchesService;
+    public WebSecurity(ResearchersService researchersService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.researchersService = researchersService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -41,7 +41,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	auth.userDetailsService(researchesService).passwordEncoder(bCryptPasswordEncoder);
+    	auth.userDetailsService(researchersService).passwordEncoder(bCryptPasswordEncoder);
     }
 
   @Bean

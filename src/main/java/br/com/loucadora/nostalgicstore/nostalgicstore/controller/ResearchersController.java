@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.response.ErrorResponse;
-import br.com.loucadora.nostalgicstore.nostalgicstore.services.ResearchesService;
+import br.com.loucadora.nostalgicstore.nostalgicstore.services.ResearchersService;
 
 @RestController
 @RequestMapping("/researchers")
-public class ResearchesController {
+public class ResearchersController {
 	
-	private ResearchesService researchesService;
+	private ResearchersService researchersService;
 
-	public ResearchesController(ResearchesService researchesService) {
-		this.researchesService = researchesService;
+	public ResearchersController(ResearchersService researchersService) {
+		this.researchersService = researchersService;
 	}
 
 	@PostMapping("/sign-up")
 	public ResponseEntity<?> create(@RequestBody Researcher researcher) {
 		try {
-			return new ResponseEntity<Researcher>(researchesService.create(researcher), HttpStatus.CREATED);
+			return new ResponseEntity<Researcher>(researchersService.create(researcher), HttpStatus.CREATED);
 		}catch(ConstraintViolationException e) {
 			return new ResponseEntity<ErrorResponse>(new ErrorResponse().preconditionFailed(e.getConstraintViolations()), HttpStatus.PRECONDITION_FAILED);
 		}
@@ -35,11 +35,11 @@ public class ResearchesController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> show(@PathVariable Integer id) {
-		return new ResponseEntity<Researcher>(researchesService.find(id), HttpStatus.OK);
+		return new ResponseEntity<Researcher>(researchersService.find(id), HttpStatus.OK);
 	}
 
 	@GetMapping
 	public ResponseEntity<?> index() {
-		return new ResponseEntity<List<Researcher>>(researchesService.all(), HttpStatus.OK);
+		return new ResponseEntity<List<Researcher>>(researchersService.all(), HttpStatus.OK);
 	}
 }

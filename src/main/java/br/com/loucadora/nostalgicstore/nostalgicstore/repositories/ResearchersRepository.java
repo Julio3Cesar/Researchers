@@ -7,6 +7,6 @@ import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface ResearchesRepository extends JpaRepository<Researcher, Integer>{ 
+public interface ResearchersRepository extends JpaRepository<Researcher, Integer>{ 
 	Researcher findByEmail(String email);
 }
