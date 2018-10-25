@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface ResearchesRepository extends JpaRepository<Researcher, Integer>{ 
-
+	Researcher findByEmail(String email);
 }
