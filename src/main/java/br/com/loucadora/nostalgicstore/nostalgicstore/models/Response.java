@@ -1,9 +1,12 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Response {
@@ -12,6 +15,9 @@ public class Response {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "question_id")
+	private Question question;
 	private String response;
 
 	public Integer getId() {
@@ -21,9 +27,17 @@ public class Response {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public Question getQuestion() {
+		return this.question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 
 	public String getResponse() {
-		return response;
+		return this.response;
 	}
 
 	public void setResponse(String response) {

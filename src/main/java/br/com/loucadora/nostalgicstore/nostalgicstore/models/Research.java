@@ -1,14 +1,14 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.models;
 
 import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Research {
@@ -17,50 +17,33 @@ public class Research {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull(message = "Researcher Author is required!")
-	@OneToOne
-	private Researcher researcherAuthor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "researcher_id", nullable = false)
+	private Researcher researcher;
 	
-	@OneToMany(targetEntity = Question.class)
-	@NotNull(message = "Question is required!")
-	private List<Question> questions;
-	
-	@OneToMany(targetEntity = QuestionResponse.class)
-	private List<QuestionResponse> questionResponses;
-	
-	@NotNull(message = "Is anonymous? is required!")
 	private Boolean isAnonymous;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "research")
+	private List<Record> records;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "research")
+	private List<Question> questions;
+
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Researcher getResearcherAuthor() {
-		return researcherAuthor;
+	
+	public Researcher getResearcher() {
+		return this.researcher;
 	}
 
-	public void setResearcherAuthor(Researcher researcherAuthor) {
-		this.researcherAuthor = researcherAuthor;
-	}
-
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
-	public List<QuestionResponse> getQuestionResponses() {
-		return questionResponses;
-	}
-
-	public void setQuestionResponses(List<QuestionResponse> questionResponses) {
-		this.questionResponses = questionResponses;
+	public void setResearcher(Researcher researcher) {
+		this.researcher = researcher;
 	}
 
 	public Boolean getIsAnonymous() {
@@ -69,5 +52,21 @@ public class Research {
 
 	public void setIsAnonymous(Boolean isAnonymous) {
 		this.isAnonymous = isAnonymous;
+	}
+
+	public List<Record> getRecords() {
+		return records;
+	}
+
+	public void setRecords(List<Record> records) {
+		this.records = records;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 }

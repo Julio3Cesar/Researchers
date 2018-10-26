@@ -109,4 +109,8 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 
+src/main/java/hibernate.cfg.xml
+src/main/java/hibernate.reveng.xml
+src/main/resources/hibernate.cfg.xml
+
 # End of https://www.gitignore.io/api/java,maven,eclipse

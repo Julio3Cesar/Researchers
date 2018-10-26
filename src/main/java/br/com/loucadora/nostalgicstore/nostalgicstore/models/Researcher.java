@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Researcher {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -33,23 +34,11 @@ public class Researcher {
 	@Size(message = "Minimum characters to password is 8.",min = 8)
 	private String password;
 	
-	@OneToMany( targetEntity= Research.class)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "researcher")
 	private List<Research> researches;
-	
-	public Integer getId() {
-		return id;
-	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public String getCompany() {
-		return company;
+		return this.company;
 	}
 
 	public void setCompany(String company) {
@@ -57,18 +46,42 @@ public class Researcher {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<Research> getResearches() {
+		return researches;
+	}
+
+	public void setResearches(List<Research> researches) {
+		this.researches = researches;
+	}
 }

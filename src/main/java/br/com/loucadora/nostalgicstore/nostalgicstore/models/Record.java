@@ -7,12 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
 
 @Entity
-public class Question {
+public class Record {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,12 +22,16 @@ public class Question {
 	@JoinColumn(name = "research_id")
 	private Research research;
 	
-	@NotNull
-	private String question;
+	@Email
+	private String email;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+	private Integer idade;
+	private String nome;
+	
+	@ManyToMany
 	private List<Response> responses;
 
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -35,7 +39,7 @@ public class Question {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public Research getResearch() {
 		return this.research;
 	}
@@ -44,12 +48,28 @@ public class Question {
 		this.research = research;
 	}
 
-	public String getQuestion() {
-		return this.question;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getIdade() {
+		return this.idade;
+	}
+
+	public void setIdade(Integer idade) {
+		this.idade = idade;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<Response> getResponses() {
