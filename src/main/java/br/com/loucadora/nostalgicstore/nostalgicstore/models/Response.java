@@ -1,5 +1,6 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Response {
 
@@ -15,9 +18,11 @@ public class Response {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "question_id")
+	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "QUESTION_ID", nullable = false)
+	@JsonIgnore
 	private Question question;
+
 	private String response;
 
 	public Integer getId() {

@@ -1,6 +1,8 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.models;
 
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Record {
 
@@ -18,8 +22,9 @@ public class Record {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "research_id")
+	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "research_id", nullable = false)
+	@JsonIgnore
 	private Research research;
 	
 	@Email
