@@ -15,6 +15,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class Researcher {
 
@@ -34,9 +42,11 @@ public class Researcher {
 	
 	@NotNull(message = "Password can't be null")
 	@Size(message = "Minimum characters to password is 8.",min = 8)
+	@JsonBackReference
 	private String password;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="researcher")
+	@JsonIgnoreProperties({"researcher"})
 	private List<Research> researches;
 
 	public String getCompany() {

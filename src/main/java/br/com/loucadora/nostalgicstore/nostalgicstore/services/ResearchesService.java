@@ -1,5 +1,7 @@
 package br.com.loucadora.nostalgicstore.nostalgicstore.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,14 @@ public class ResearchesService {
 			}
 		}
 		return repository.save(research);
+	}
+
+	public Research find(Integer id) {
+		return repository.findById(id).get(); 
+	}
+
+	public List<Research> all() {
+		return repository.findAll();
 	}
 
 }

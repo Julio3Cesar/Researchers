@@ -13,7 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 public class Question {
@@ -23,14 +27,15 @@ public class Question {
 	private Integer id;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name = "research_id", nullable = false)
-	@JsonIgnore
+	@JoinColumn(name = "RESEARCH_ID", nullable = false)
+	@JsonBackReference
 	private Research research;
 	
 	@NotNull
 	private String question;
 	
-	@OneToMany(fetch = FetchType.EAGER,mappedBy="question",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="question", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<Response> responses;
 
 	public Integer getId() {

@@ -13,7 +13,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 public class Record {
@@ -24,7 +29,7 @@ public class Record {
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "research_id", nullable = false)
-	@JsonIgnore
+	@JsonBackReference
 	private Research research;
 	
 	@Email

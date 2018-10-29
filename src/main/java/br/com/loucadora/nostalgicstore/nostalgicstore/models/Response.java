@@ -9,7 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 public class Response {
@@ -20,7 +25,7 @@ public class Response {
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "QUESTION_ID", nullable = false)
-	@JsonIgnore
+	@JsonBackReference
 	private Question question;
 
 	private String response;
