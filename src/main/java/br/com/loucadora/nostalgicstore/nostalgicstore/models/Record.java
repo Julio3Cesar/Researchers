@@ -27,16 +27,15 @@ public class Record {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "research_id", nullable = false)
 	@JsonBackReference
 	private Research research;
 	
 	@Email
 	private String email;
-	
-	private Integer idade;
-	private String nome;
+	private Integer age;
+	private String name;
 	
 	@ManyToMany
 	private List<Response> responses;
@@ -66,24 +65,24 @@ public class Record {
 		this.email = email;
 	}
 
-	public Integer getIdade() {
-		return this.idade;
-	}
-
-	public void setIdade(Integer idade) {
-		this.idade = idade;
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public List<Response> getResponses() {
 		return responses;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setResponses(List<Response> responses) {
