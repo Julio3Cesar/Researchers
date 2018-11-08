@@ -38,7 +38,7 @@ public class Record {
 	private String name;
 	
 	@ManyToMany
-	private List<Response> responses;
+	private List<Alternative> alternatives;
 
 	
 	public Integer getId() {
@@ -65,8 +65,8 @@ public class Record {
 		this.email = email;
 	}
 
-	public List<Response> getResponses() {
-		return responses;
+	public List<Alternative> getResponses() {
+		return alternatives;
 	}
 
 	public Integer getAge() {
@@ -85,7 +85,7 @@ public class Record {
 		this.name = name;
 	}
 
-	public void setResponses(List<Response> responses) {
-		this.responses = responses;
+	public void setResponses(List<Alternative> alternatives) {
+		this.alternatives = alternatives;
 	}
 }

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-public class Response {
+public class Alternative {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Response {
 	@JsonBackReference
 	private Question question;
 
-	private String response;
+	private String alternative;
 
 	public Integer getId() {
 		return id;
@@ -46,11 +46,11 @@ public class Response {
 		this.question = question;
 	}
 
-	public String getResponse() {
-		return this.response;
+	public String getAlternative() {
+		return this.alternative;
 	}
 
-	public void setResponse(String response) {
-		this.response = response;
+	public void setAlternative(String alternative) {
+		this.alternative = alternative;
 	}
 }

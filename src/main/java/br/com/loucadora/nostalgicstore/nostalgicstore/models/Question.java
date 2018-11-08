@@ -36,7 +36,7 @@ public class Question {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="question", cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Response> responses;
+	private List<Alternative> alternatives;
 
 	public Integer getId() {
 		return this.id;
@@ -62,11 +62,11 @@ public class Question {
 		this.question = question;
 	}
 
-	public List<Response> getResponses() {
-		return responses;
+	public List<Alternative> getAlternatives() {
+		return alternatives;
 	}
 
-	public void setResponses(List<Response> responses) {
-		this.responses = responses;
+	public void setAlternatives(List<Alternative> alternatives) {
+		this.alternatives = alternatives;
 	}
 }

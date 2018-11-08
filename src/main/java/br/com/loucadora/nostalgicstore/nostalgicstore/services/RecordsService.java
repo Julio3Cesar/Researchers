@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Question;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Record;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
-import br.com.loucadora.nostalgicstore.nostalgicstore.models.Response;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Alternative;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.RecordsRepository;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchesRepository;
 

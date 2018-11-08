@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Question;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
-import br.com.loucadora.nostalgicstore.nostalgicstore.models.Response;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Alternative;
+import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchersRepository;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchesRepository;
 
 @Service
@@ -15,11 +16,14 @@ public class ResearchesService {
 
 	@Autowired
 	private ResearchesRepository repository;
+	@Autowired
+	private ResearchersRepository researchersRepository;
 	
 	public Research create(Research research) {
+		research.setResearcher(researchersRepository.findByEmail(research.getResearcher().getEmail()));
 		for(Question q : research.getQuestions()) {
 			q.setResearch(research);
-			for(Response r : q.getResponses()) {
+			for(Alternative r : q.getAlternatives()) {
 				r.setQuestion(q);
 			}
 		}
