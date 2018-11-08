@@ -30,9 +30,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-        		.antMatchers("/*").permitAll()
+        		//.antMatchers("/*").permitAll()
         		//aqui bloqueia as rotas de cadastro e edição de pesquisa
-        		.antMatchers(HttpMethod.GET, "/researche/").authenticated()
+        		.antMatchers(HttpMethod.POST, "/researches").authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
