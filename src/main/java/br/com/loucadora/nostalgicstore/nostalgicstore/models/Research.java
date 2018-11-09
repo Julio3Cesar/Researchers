@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.swing.text.View;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -29,6 +30,9 @@ public class Research {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull(message = "Title can't be null")
+	private String title;
+
 	@ManyToOne
 	@JoinColumn(name = "researcher_id", nullable = false)
 	@JsonIgnoreProperties({"researches"})
@@ -83,5 +87,12 @@ public class Research {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

@@ -34,8 +34,11 @@ public class ResearchesService {
 		return repository.findById(id).get(); 
 	}
 
-	public List<Research> all() {
-		return repository.findAll();
+	public List<Research> all(Integer researcherId) {
+		List<Research> researches = repository.findByResearcherId(researcherId);
+		if(researches.isEmpty()) {
+			researches = repository.findAll();
+		}
+		return researches;
 	}
-
 }

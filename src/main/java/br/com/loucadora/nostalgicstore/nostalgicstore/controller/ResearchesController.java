@@ -42,8 +42,8 @@ public class ResearchesController {
 		return new ResponseEntity<Research>(researchesService.find(id), HttpStatus.OK);
 	}
 
-	@GetMapping
-	public ResponseEntity<?> index() {
-		return new ResponseEntity<List<Research>>(researchesService.all(), HttpStatus.OK);
+	@GetMapping("/index/{researcherId}")
+	public ResponseEntity<?> index(@PathVariable Integer researcherId) {
+		return new ResponseEntity<List<Research>>(researchesService.all(researcherId), HttpStatus.OK);
 	}
 }
