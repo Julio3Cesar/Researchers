@@ -3,47 +3,42 @@ package br.com.loucadora.nostalgicstore.nostalgicstore.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
+
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Question;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Alternative;
+import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchersRepository;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchesRepository;
 
-import static java.util.Collections.emptyList;
-
-
 @Service
-public class ResearchesService implements UserDetailsService{
-	
+public class ResearchesService {
+
 	@Autowired
 	private ResearchesRepository repository;
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	public Researcher create(Researcher researcher) {
-		if(researcher.getPassword() != null && researcher.getPassword().length() > 7)
-			researcher.setPassword(bCryptPasswordEncoder.encode(researcher.getPassword()));
-		return repository.save(researcher);
+	private ResearchersRepository researchersRepository;
+	
+	public Research create(Research research) {
+		research.setResearcher(researchersRepository.findByEmail(research.getResearcher().getEmail()));
+		for(Question q : research.getQuestions()) {
+			q.setResearch(research);
+			for(Alternative r : q.getAlternatives()) {
+				r.setQuestion(q);
+			}
+		}
+		return repository.save(research);
 	}
 
-	public Researcher find(Integer id) {
-		return repository.findById(id).get();
+	public Research find(Integer id) {
+		return repository.findById(id).get(); 
 	}
 
-	public List<Researcher> all() {
-		return repository.findAll();
+	public List<Research> all(Integer researcherId) {
+		List<Research> researches = repository.findByResearcherId(researcherId);
+		if(researches.isEmpty()) {
+			researches = repository.findAll();
+		}
+		return researches;
 	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Researcher applicationUser = repository.findByEmail(username);
-        if (applicationUser == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
-	}
-
 }

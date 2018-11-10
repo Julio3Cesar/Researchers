@@ -6,7 +6,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 
-@Service
+//@Service
 public class LoginService {
 
 	public String login(Researcher researcher) {
@@ -14,7 +14,8 @@ public class LoginService {
 		if(researcher == null) return null; 
 		
 		try {
-			return token(researcher);
+			String s = token(researcher);
+			return s;
 		} catch (IllegalArgumentException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return null;

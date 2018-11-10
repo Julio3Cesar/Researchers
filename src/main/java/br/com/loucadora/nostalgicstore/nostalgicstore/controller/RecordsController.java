@@ -13,25 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Record;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.response.ErrorResponse;
+import br.com.loucadora.nostalgicstore.nostalgicstore.services.RecordsService;
 import br.com.loucadora.nostalgicstore.nostalgicstore.services.ResearchesService;
 
 @RestController
-@RequestMapping("/researches")
-public class ResearchesController {
+@RequestMapping("/records")
+public class RecordsController {
 
-	private ResearchesService researchesService;
+	private RecordsService recordsService;
 
-	public ResearchesController(ResearchesService researchesService) {
-		this.researchesService = researchesService;
+	public RecordsController(RecordsService recordsService) {
+		this.recordsService = recordsService;
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Research research) {
+	public ResponseEntity<?>create(@RequestBody Record record) {
 		try {
-			return new ResponseEntity<Research>(researchesService.create(research), HttpStatus.CREATED);
+			return new ResponseEntity<Record>(recordsService.create(record), HttpStatus.CREATED);
 		}catch(ConstraintViolationException e) {
 			return new ResponseEntity<ErrorResponse>(new ErrorResponse().preconditionFailed(e.getConstraintViolations()), HttpStatus.PRECONDITION_FAILED);
 		}
@@ -39,11 +41,11 @@ public class ResearchesController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> show(@PathVariable Integer id) {
-		return new ResponseEntity<Research>(researchesService.find(id), HttpStatus.OK);
+		return new ResponseEntity<Record>(recordsService.find(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/index/{researcherId}")
-	public ResponseEntity<?> index(@PathVariable Integer researcherId) {
-		return new ResponseEntity<List<Research>>(researchesService.all(researcherId), HttpStatus.OK);
+	@GetMapping
+	public ResponseEntity<?> index() {
+		return new ResponseEntity<List<Record>>(recordsService.all(), HttpStatus.OK);
 	}
 }
