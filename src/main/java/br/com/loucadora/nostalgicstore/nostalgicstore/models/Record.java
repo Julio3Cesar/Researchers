@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -37,9 +39,10 @@ public class Record {
 	private Integer age;
 	private String name;
 	
-	@ManyToMany
+	@NotNull
+	@ManyToMany(cascade=CascadeType.ALL)  
+    @JoinTable(name="record_alternatives", joinColumns=@JoinColumn(name="record_id"), inverseJoinColumns=@JoinColumn(name="alternatives_id"))  
 	private List<Alternative> alternatives;
-
 	
 	public Integer getId() {
 		return this.id;
@@ -65,10 +68,6 @@ public class Record {
 		this.email = email;
 	}
 
-	public List<Alternative> getResponses() {
-		return alternatives;
-	}
-
 	public Integer getAge() {
 		return age;
 	}
@@ -85,7 +84,11 @@ public class Record {
 		this.name = name;
 	}
 
-	public void setResponses(List<Alternative> alternatives) {
+	public List<Alternative> getAlternatives() {
+		return alternatives;
+	}
+
+	public void setAlternatives(List<Alternative> alternatives) {
 		this.alternatives = alternatives;
 	}
 }

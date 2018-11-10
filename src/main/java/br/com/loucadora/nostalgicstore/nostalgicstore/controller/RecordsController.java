@@ -31,7 +31,7 @@ public class RecordsController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Record record) {
+	public ResponseEntity<?>create(@RequestBody Record record) {
 		try {
 			return new ResponseEntity<Record>(recordsService.create(record), HttpStatus.CREATED);
 		}catch(ConstraintViolationException e) {
