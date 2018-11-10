@@ -44,8 +44,8 @@ public class RecordsController {
 		return new ResponseEntity<Record>(recordsService.find(id), HttpStatus.OK);
 	}
 
-	@GetMapping
-	public ResponseEntity<?> index() {
-		return new ResponseEntity<List<Record>>(recordsService.all(), HttpStatus.OK);
+	@GetMapping("/index/{researcherId}")
+	public ResponseEntity<?> index(@PathVariable Integer researcherId) {
+		return new ResponseEntity<List<Record>>(recordsService.allByResearchId(researcherId), HttpStatus.OK);
 	}
 }

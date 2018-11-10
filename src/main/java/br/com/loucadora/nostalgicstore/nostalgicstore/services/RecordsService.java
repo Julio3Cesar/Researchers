@@ -35,8 +35,8 @@ public class RecordsService {
 		return repository.findById(id).get(); 
 	}
 
-	public List<Record> all() {
-		return repository.findAll();
+	public List<Record> allByResearchId(Integer researchId) {
+		return repository.findByResearchId(researchId);
 	}
 
 }
