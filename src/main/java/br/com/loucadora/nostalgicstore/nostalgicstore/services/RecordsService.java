@@ -38,5 +38,4 @@ public class RecordsService {
 	public List<Record> allByResearchId(Integer researchId) {
 		return repository.findByResearchId(researchId);
 	}
-
 }

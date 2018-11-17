@@ -41,4 +41,8 @@ public class ResearchesService {
 		}
 		return researches;
 	}
+	
+	public List<Research> findByResearcherEmail(String researcherEmail) {
+		return repository.findByResearcherEmail(researcherEmail);
+	}
 }

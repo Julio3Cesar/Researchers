@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface ResearchesRepository extends JpaRepository<Research, Integer>{ 
 	List<Research> findByResearcherId(Integer researcherId);
+	List<Research> findByResearcherEmail(String researcherEmail);
 }

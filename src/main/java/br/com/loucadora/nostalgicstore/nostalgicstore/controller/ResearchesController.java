@@ -42,6 +42,11 @@ public class ResearchesController {
 		return new ResponseEntity<Research>(researchesService.find(id), HttpStatus.OK);
 	}
 
+	@GetMapping("/index/email/{researchEmail}")
+	public ResponseEntity<?> indexByEmail(@PathVariable String researchEmail) {
+		return new ResponseEntity<List<Research>>(researchesService.findByResearcherEmail(researchEmail), HttpStatus.OK);
+	}
+	
 	@GetMapping("/index/{researchId}")
 	public ResponseEntity<?> index(@PathVariable Integer researchId) {
 		return new ResponseEntity<List<Research>>(researchesService.all(researchId), HttpStatus.OK);
