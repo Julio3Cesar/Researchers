@@ -36,7 +36,15 @@ public class ResearchersService implements UserDetailsService{
 	public List<Researcher> all() {
 		return repository.findAll();
 	}
-
+	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+	
+	public Researcher update(Researcher researcher) {
+		return repository.save(researcher);
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Researcher applicationUser = repository.findByEmail(username);
@@ -45,5 +53,4 @@ public class ResearchersService implements UserDetailsService{
         }
         return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
 	}
-
 }
