@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Question;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Alternative;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchersRepository;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.ResearchesRepository;
@@ -44,5 +45,13 @@ public class ResearchesService {
 	
 	public List<Research> findByResearcherEmail(String researcherEmail) {
 		return repository.findByResearcherEmail(researcherEmail);
+	}
+	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+	
+	public Research update(Research research) {
+		return repository.save(research);
 	}
 }

@@ -53,6 +53,6 @@ public class ResearchersController {
 	
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Researcher researcher) {
-		return new ResponseEntity<Researcher>(researchersService.update(researcher), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Researcher>(researchersService.update(researcher), HttpStatus.OK);
 	}
 }
