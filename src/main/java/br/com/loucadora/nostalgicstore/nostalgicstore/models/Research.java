@@ -40,7 +40,7 @@ public class Research {
 	
 	private Boolean isAnonymous;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="research")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="research", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<Record> records;
 	
