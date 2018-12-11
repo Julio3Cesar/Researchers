@@ -32,7 +32,7 @@ public class Record {
 	
 	@ManyToOne
 	@JoinColumn(name = "research_id", nullable = false)
-	@JsonIgnoreProperties({"records"})
+	@JsonBackReference
 	private Research research;
 	
 	@Email

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Question;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Record;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Report;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Alternative;
 import br.com.loucadora.nostalgicstore.nostalgicstore.repositories.AlternativesRepository;
@@ -37,5 +38,9 @@ public class RecordsService {
 
 	public List<Record> allByResearchId(Integer researchId) {
 		return repository.findByResearchId(researchId);
+	}
+
+	public Report report(Integer researcherId) {
+		return null;
 	}
 }

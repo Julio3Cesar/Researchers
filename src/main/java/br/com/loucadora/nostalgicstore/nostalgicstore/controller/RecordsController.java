@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Record;
+import br.com.loucadora.nostalgicstore.nostalgicstore.models.Report;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Research;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.Researcher;
 import br.com.loucadora.nostalgicstore.nostalgicstore.models.response.ErrorResponse;
@@ -47,5 +48,10 @@ public class RecordsController {
 	@GetMapping("/show/{researcherId}")
 	public ResponseEntity<?> index(@PathVariable Integer researcherId) {
 		return new ResponseEntity<List<Record>>(recordsService.allByResearchId(researcherId), HttpStatus.OK);
+	}
+	
+	@GetMapping("/report/{researcherId}")
+	public ResponseEntity<?> report(@PathVariable Integer researcherId) {
+		return new ResponseEntity<Report>(recordsService.report(researcherId), HttpStatus.OK);
 	}
 }
