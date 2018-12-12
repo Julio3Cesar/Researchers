@@ -53,4 +53,8 @@ public class ResearchersService implements UserDetailsService{
         }
         return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
 	}
+
+	public Researcher findByemail(String email) {
+		return repository.findByEmail(email);
+	}
 }

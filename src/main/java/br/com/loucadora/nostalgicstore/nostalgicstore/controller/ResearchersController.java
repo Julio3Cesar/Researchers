@@ -43,6 +43,11 @@ public class ResearchersController {
 		return new ResponseEntity<Researcher>(researchersService.find(id), HttpStatus.OK);
 	}
 
+	@GetMapping("/byemail/{email}")
+	public ResponseEntity<?> showByEmail(@PathVariable String email) {
+		return new ResponseEntity<Researcher>(researchersService.findByemail(email), HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<?> index() {
 		return new ResponseEntity<List<Researcher>>(researchersService.all(), HttpStatus.OK);
