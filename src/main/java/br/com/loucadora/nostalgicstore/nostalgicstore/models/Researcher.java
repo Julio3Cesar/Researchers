@@ -2,6 +2,7 @@ package br.com.loucadora.nostalgicstore.nostalgicstore.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class Researcher {
 	@JsonBackReference
 	private String password;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="researcher")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="researcher", cascade=CascadeType.ALL)
 	@JsonIgnoreProperties({"researcher"})
 	private List<Research> researches;
 

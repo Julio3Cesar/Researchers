@@ -48,9 +48,9 @@ public class ResearchersController {
 		return new ResponseEntity<List<Researcher>>(researchersService.all(), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> destroy(@PathVariable Integer id) {
-		researchersService.delete(id);
+	@PostMapping("/delete/{email}")
+	public ResponseEntity<?> destroy(@PathVariable String email) {
+		researchersService.deleteByEmail(email);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	

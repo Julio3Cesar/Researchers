@@ -37,8 +37,8 @@ public class ResearchersService implements UserDetailsService{
 		return repository.findAll();
 	}
 	
-	public void delete(Integer id) {
-		repository.deleteById(id);
+	public void deleteByEmail(String email) {
+		repository.deleteById(repository.findByEmail(email).getId());
 	}
 	
 	public Researcher update(Researcher researcher) {
