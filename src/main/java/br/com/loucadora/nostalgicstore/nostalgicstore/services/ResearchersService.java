@@ -24,7 +24,7 @@ public class ResearchersService implements UserDetailsService{
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public Researcher create(Researcher researcher) {
-		if(researcher.getPassword() != null && researcher.getPassword().length() > 7)
+		if(researcher.getPassword() != null && researcher.getPassword().length() > 7 && researcher.getId() == null)
 			researcher.setPassword(bCryptPasswordEncoder.encode(researcher.getPassword()));
 		return repository.save(researcher);
 	}

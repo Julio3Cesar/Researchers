@@ -36,7 +36,7 @@ public class Researcher {
 	
 	@NotNull(message = "Password can't be null")
 	@Size(message = "Minimum characters to password is 8.",min = 8)
-	@JsonBackReference
+	//@JsonBackReference
 	private String password;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="researcher", cascade=CascadeType.ALL)
